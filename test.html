@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Store and retrieve data from local storage.</h2>
+
+<p id="demo"></p>
+
+<script>
+var myObj, myJSON, text, obj;
+var myObjArray=[];
+// Storing data:
+for(i=0;i<5;i++){
+    myObj = { name: "John", age: 31, city: "New York" };
+    myObjArray.push(myObj);
+}
+myJSON = JSON.stringify(myObjArray);
+console.log(myJSON);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+extends index
+
+block main 
+    form(name='emailform',action='/sendemail',method='POST')
+        table
+            tr 
+                th Name
+                th Email
+                th Send
+                th Multiple
+            - var input=JSON.parse(tableData)
+            - var buttonIndex=0
+            each obj in input
+                tr 
+                    td= obj.name
+                    td= obj.email
+                    td  
+                        button(id='button'+buttonIndex,type='button',onclick=`reveal("${obj.name}","${obj.email}")`)   Send Mail
+                        - buttonIndex++;
+                    td
+                        input(type='checkbox',name='multiple',value=obj.email)
+            tr 
+                td  Everyone
+                td  Everyone
+                td
+                    button(id='button'+buttonIndex,type='button',onclick=`reveal("Everyone","Everyone")`)   Send To All
+                        - buttonIndex++;
+                td 
+                    button(id='button'+buttonIndex,type='button',onclick=`sendMultiple()`)   Send Multiple
+                        - buttonIndex++;
+        #formWrapper    
+            #formSendWrapper
+                    fieldset
+                        legend  To
+                        p   Name:
+                        input(type='text',name='receiverName',id='receiverName')
+                        p   Email:
+                        input(type='text',name='receiverEmail',id='receiverEmail',required)
+                    fieldset
+                        legend Content    
+                        p   Subject:
+                        input(type='text',name='subject')
+                        p   Message
+                        textarea(name='message',rows='5')
+                        br
+                        button(type='submit',id='submitbutton') Send
+                        button(type='reset',id='cancelButton') Cancel
